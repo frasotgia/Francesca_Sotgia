@@ -1,0 +1,150 @@
+[System]
+Name='sug_TumorSegmentation'
+Type='sugeno'
+Version=2.0
+NumInputs=11
+NumOutputs=1
+NumRules=44
+AndMethod='min'
+OrMethod='max'
+ImpMethod='prod'
+AggMethod='sum'
+DefuzzMethod='wtaver'
+
+[Input1]
+Name='pixel'
+Range=[0 1]
+NumMFs=3
+MF1='background':'trimf',[0 0 0.4]
+MF2='brain':'trimf',[0.35 0.6 0.8]
+MF3='tumor':'trimf',[0.75 1 1]
+
+[Input2]
+Name='mean'
+Range=[0 1]
+NumMFs=3
+MF1='background':'trimf',[0 0 0.4]
+MF2='brain':'trimf',[0.35 0.6 0.8]
+MF3='tumor':'trimf',[0.7 1 1]
+
+[Input3]
+Name='std'
+Range=[0 1]
+NumMFs=2
+MF1='background ':'trimf',[0 0.1 0.4]
+MF2='brain':'trimf',[0.3 0.5 1]
+
+[Input4]
+Name='kurtosis'
+Range=[0 1]
+NumMFs=2
+MF1='background':'trimf',[0 0.05 0.2]
+MF2='brain':'trimf',[0.2 0.6 1]
+
+[Input5]
+Name='skewness'
+Range=[0 1]
+NumMFs=3
+MF1='brain1':'trimf',[0 0.15 0.5]
+MF2='background':'trimf',[0.5 0.5 0.5]
+MF3='brain2':'trimf',[0.5 0.9 1]
+
+[Input6]
+Name='entropy'
+Range=[0 1]
+NumMFs=2
+MF1='background':'trimf',[0 0.05 0.3]
+MF2='brain':'trimf',[0.25 0.8 1]
+
+[Input7]
+Name='energy'
+Range=[0 1]
+NumMFs=3
+MF1='background':'trimf',[0 0 0.3]
+MF2='brain':'trimf',[0.25 0.5 0.75]
+MF3='tumor':'trimf',[0.7 1 1]
+
+[Input8]
+Name='contrast'
+Range=[0 1]
+NumMFs=3
+MF1='background':'trimf',[0 0 0.3]
+MF2='brain':'trimf',[0.25 0.65 0.8]
+MF3='tumor':'trimf',[0.75 1 1]
+
+[Input9]
+Name='median'
+Range=[0 1]
+NumMFs=3
+MF1='background':'trimf',[0 0 0.4]
+MF2='brain':'trimf',[0.35 0.6 0.8]
+MF3='tumor':'trimf',[0.75 1 1]
+
+[Input10]
+Name='harmmean'
+Range=[0 1]
+NumMFs=3
+MF1='background':'trimf',[0 0 0.4]
+MF2='brain':'trimf',[0.35 0.6 0.8]
+MF3='tumor':'trimf',[0.7 1 1]
+
+[Input11]
+Name='geomean'
+Range=[0 1]
+NumMFs=3
+MF1='background':'trimf',[0 0 0.4]
+MF2='brain':'trimf',[0.35 0.6 0.8]
+MF3='tumor':'trimf',[0.75 1 1]
+
+[Output1]
+Name='output'
+Range=[0 1]
+NumMFs=2
+MF1='no tumor':'constant',[0]
+MF2='tumor':'constant',[1]
+
+[Rules]
+3 3 0 0 0 0 0 0 0 0 0, 2 (1) : 1
+3 0 0 0 0 0 3 0 0 0 0, 2 (1) : 1
+3 0 0 0 0 0 0 3 0 0 0, 2 (1) : 1
+3 0 0 0 0 0 0 0 0 3 0, 2 (1) : 1
+0 3 0 0 0 0 0 0 0 0 3, 2 (1) : 1
+0 3 0 0 0 0 3 0 0 0 0, 2 (1) : 1
+0 3 0 0 0 0 0 0 3 0 0, 2 (1) : 1
+0 0 0 0 0 0 3 3 0 0 0, 2 (1) : 1
+0 0 0 0 0 0 3 0 0 0 3, 2 (1) : 1
+0 0 0 0 0 0 0 3 0 1 0, 2 (1) : 1
+0 0 0 0 0 0 0 3 3 0 0, 2 (1) : 1
+0 0 0 0 0 0 0 0 3 0 3, 2 (1) : 1
+3 0 0 0 0 0 3 3 0 0 0, 2 (1) : 1
+3 0 0 0 0 0 3 0 0 0 3, 2 (1) : 1
+0 3 0 0 0 0 3 0 3 0 0, 2 (1) : 1
+0 3 0 0 0 0 3 0 0 0 3, 2 (1) : 1
+0 0 0 0 0 0 0 3 0 3 3, 2 (1) : 1
+3 0 0 0 0 0 3 0 3 3 0, 2 (1) : 1
+3 3 0 0 0 0 0 3 0 0 3, 2 (1) : 1
+0 0 0 0 0 0 0 3 3 0 3, 2 (1) : 1
+1 0 0 0 0 0 1 0 0 0 0, 1 (1) : 1
+1 0 0 0 0 0 0 0 0 2 0, 1 (1) : 1
+2 0 0 2 0 0 1 0 0 0 0, 1 (1) : 1
+0 0 2 0 0 2 0 0 0 0 0, 1 (1) : 1
+0 0 2 0 3 0 0 0 0 0 0, 1 (1) : 1
+0 0 0 2 0 0 1 0 0 0 0, 1 (1) : 1
+0 0 0 2 0 0 0 0 0 2 0, 1 (1) : 1
+0 2 0 0 0 2 0 0 2 0 0, 1 (1) : 1
+0 0 0 0 0 2 0 1 0 0 1, 1 (1) : 1
+0 1 0 0 1 0 0 0 0 0 2, 1 (1) : 1
+0 0 0 0 0 0 0 2 0 1 0, 1 (1) : 1
+0 0 2 0 0 0 0 2 1 0 0, 1 (1) : 1
+0 2 0 0 0 2 0 0 0 0 2, 1 (1) : 1
+0 0 0 0 0 0 0 0 0 1 2, 1 (1) : 1
+0 0 0 0 1 0 2 0 0 0 0, 1 (1) : 1
+0 0 0 0 3 0 2 0 0 1 0, 1 (1) : 1
+0 0 0 0 1 2 2 0 0 0 0, 1 (1) : 1
+0 0 0 2 0 2 0 1 0 0 0, 1 (1) : 1
+0 0 0 0 0 2 0 2 0 2 0, 1 (1) : 1
+0 0 0 0 0 0 0 1 0 2 1, 1 (1) : 1
+3 3 0 0 0 0 3 3 3 3 3, 2 (1) : 1
+1 1 0 0 0 0 1 1 1 1 1, 1 (1) : 2
+2 2 0 0 0 0 2 2 2 2 2, 1 (1) : 2
+3 3 0 0 0 0 3 3 3 3 3, 2 (1) : 2
